@@ -28,6 +28,7 @@ public:
      * @param key The key to associate with the loaded texture.
      * @param renderer A shared pointer to the SDL renderer.
      * @param blending_mode The blending mode for the texture (optional).
+     * @return True if the texture was loaded successfully, false otherwise.
      */
     bool loadTexture(const std::string& filename, const std::string& key, const std::shared_ptr<SDL_Renderer>& renderer, const int32_t blending_mode = SDL_BLENDMODE_INVALID);
 
