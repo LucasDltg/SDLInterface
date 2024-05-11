@@ -64,6 +64,7 @@ const std::shared_ptr<SDL_Texture> MyComponent::render(std::shared_ptr<SDL_Rende
     rect = {width / 4, height / 2, width / 4, height / 4};
     SDL_RenderCopy(renderer.get(), _texture_manager.getTexture("default").get(), nullptr, &rect);
 
+    std::cout << _texture_size.first << " " << _texture_size.second << std::endl;
     return _texture;
 }
 

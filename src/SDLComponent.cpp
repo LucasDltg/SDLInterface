@@ -12,6 +12,7 @@ void SDLComponent::setSurfaceDimensions(uint32_t width, uint32_t height, std::sh
         throw std::runtime_error("SDL_CreateRGBSurface failed");
     }
     _texture_manager.updateTextures(renderer);
+    _texture_size = {width, height};
 }
 
 void SDLComponent::pushEvent(const EventData& event)

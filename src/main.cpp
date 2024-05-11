@@ -16,9 +16,9 @@ int32_t main(int32_t argc, char* argv[])
     SDL_DisplayMode screen_mode;
     SDL_GetDisplayMode(0, 0, &screen_mode);
     
-    app.run({0}, screen_mode.refresh_rate); 
-    app.run({1}, screen_mode.refresh_rate); 
-    app.run({2}, screen_mode.refresh_rate); 
+    // app.run({0}, screen_mode.refresh_rate); 
+    // app.run({1}, screen_mode.refresh_rate); 
+    // app.run({2}, screen_mode.refresh_rate); 
     app.run({}, screen_mode.refresh_rate); 
 
     return 0;

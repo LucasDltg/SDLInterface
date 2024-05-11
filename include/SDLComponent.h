@@ -79,6 +79,7 @@ public:
 
 protected:
     std::shared_ptr<SDL_Texture> _texture; ///< The SDL texture.
+    std::pair<int32_t, int32_t> _texture_size; ///< The size of the texture
     std::atomic<bool> _is_running; ///< Flag indicating if the component is running.
     TextureManager _texture_manager; ///< The texture manager for the component.
 
