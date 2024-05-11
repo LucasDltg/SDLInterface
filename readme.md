@@ -11,5 +11,5 @@ An example of how to implement this is demonstrated in MyComponent.cpp.
 ## TextureManager:
 TextureManager simplifies the usage of textures from images. It offers the following functionalities:
 - loadDefaultTextures: Loads a default texture with the key "default".
-- loadTexture: Loads a texture from a file with your specified key.
+- loadTextureFromFile: Loads a texture from a file with your specified key.
 - getTexture: Retrieves a pointer to the queried texture.

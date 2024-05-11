@@ -14,7 +14,7 @@ SDLApp::SDLApp(const int32_t screen_width, const int32_t screen_height, const ui
     uint32_t img_flags = IMG_INIT_PNG;
     if (!(IMG_Init(img_flags) & img_flags))
         throw std::runtime_error("SDL_image initialization failed: " + std::string(IMG_GetError()));
-        
+
     if(TTF_Init() == -1)
         throw std::runtime_error("SDL_ttf initialization failed: " + std::string(TTF_GetError()));
 
@@ -32,7 +32,6 @@ SDLApp::SDLApp(const int32_t screen_width, const int32_t screen_height, const ui
         std::cerr << "Failed to load font: " << TTF_GetError() << " some functionalities may not work" << std::endl;
     
     SDL_SetWindowMinimumSize(_window.get(), _MIN_SCREEN_WIDTH, _MIN_SCREEN_HEIGHT);
-    SDL_SetRenderDrawBlendMode(_renderer.get(), SDL_BLENDMODE_BLEND);
 
     _window_dimensions = {screen_width, screen_height};
 }
@@ -91,6 +90,7 @@ void SDLApp::run(std::set<int32_t> targets, const int32_t desired_fps)
         // ------ render ------
         SDL_SetRenderDrawColor(_renderer.get(), 0, 0, 0, 255);
         SDL_RenderClear(_renderer.get());
+        // SDL_SetRenderDrawBlendMode(_renderer.get(), SDL_BLENDMODE_NONE);
         for (size_t i(0); i < _components.size(); i++)
         {
             if(!_components[i].component->_is_running || (targets.size() > 0 && targets.find(i) == targets.end()))
