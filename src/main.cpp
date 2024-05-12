@@ -9,8 +9,8 @@ int32_t main(int32_t argc, char* argv[])
 
     SDLApp app(SDLApp::_MIN_SCREEN_WIDTH, SDLApp::_MIN_SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE, "assets/arial.ttf");
     app.addComponent(std::make_shared<MyComponent>(0xFF0000FF), {0.0f, 0.0f, 0.5f, 0.5f}, true);
-    app.addComponent(std::make_shared<MyComponent>(0xFF0000FF), {0.0f, 0.5f, 1.0f, 1.0f}, true);
-    app.addComponent(std::make_shared<MyComponent>(0xFF0000FF), {0.5f, 0.0f, 1.0f, 0.5f}, true);
+    // app.addComponent(std::make_shared<MyComponent>(0xFF0000FF), {0.0f, 0.5f, 1.0f, 1.0f}, true);
+    // app.addComponent(std::make_shared<MyComponent>(0xFF0000FF), {0.5f, 0.0f, 1.0f, 0.5f}, true);
     
     // get screen refresh rate
     SDL_DisplayMode screen_mode;
@@ -19,7 +19,7 @@ int32_t main(int32_t argc, char* argv[])
     // app.run({0}, screen_mode.refresh_rate); 
     // app.run({1}, screen_mode.refresh_rate); 
     // app.run({2}, screen_mode.refresh_rate); 
-    app.run({}, screen_mode.refresh_rate); 
+    app.run({}, screen_mode.refresh_rate);
 
     return 0;
 }

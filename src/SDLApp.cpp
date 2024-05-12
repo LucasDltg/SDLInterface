@@ -1,12 +1,13 @@
 #include "../include/SDLApp.h"
 
 // faire un système de focus pour les fenêtres
+// systeme de mutex pour les objets, actuellement lock global
 
 const _Float32 SDLApp::_MIN_SCREEN_WIDTH = 1280;
 const _Float32 SDLApp::_MIN_SCREEN_HEIGHT = 720;
 
 SDLApp::SDLApp(const int32_t screen_width, const int32_t screen_height, const uint32_t flags, const std::string& font_path)
-    : _window(nullptr, SDL_DestroyWindow), _renderer(nullptr, SDL_DestroyRenderer), _font(nullptr), _is_running(false), _components(), _mutex()
+    : _window(nullptr, SDL_DestroyWindow), _renderer(nullptr, SDL_DestroyRenderer), _font(nullptr), _is_running(false), _components(), _window_dimensions(), _mutex()
 {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
         throw std::runtime_error("SDL initialization failed: " + std::string(SDL_GetError()));
@@ -39,8 +40,9 @@ SDLApp::SDLApp(const int32_t screen_width, const int32_t screen_height, const ui
 void SDLApp::addComponent(const std::shared_ptr<SDLComponent>& obj, const SDL_FRect location, const bool draw_fps)
 {
     // no need to lock the mutex here, as the main is adding the components before the main loop starts so no other thread is running
-    _components.push_back({.component = obj, .location = location, .fps = 0, .draw_fps = draw_fps});
+    _components.push_back({.component = obj, .location = location, .fps = 60, .draw_fps = draw_fps});
     obj->setSurfaceDimensions(static_cast<uint32_t>((location.w - location.x) * _window_dimensions.first), static_cast<uint32_t>((location.h - location.y) * _window_dimensions.second), _renderer);
+    obj->beforeResize(static_cast<uint32_t>((location.w - location.x) * _window_dimensions.first), static_cast<uint32_t>((location.h - location.y) * _window_dimensions.second), _renderer);
     obj->initSurface(_renderer);
 }
 
@@ -54,7 +56,7 @@ void SDLApp::run(std::set<int32_t> targets, const int32_t desired_fps)
         if(targets.size() > 0 && targets.find(i) == targets.end())
             continue;
         _components[i].component->_is_running = true;
-        threads.push_back(std::thread(&SDLApp::loop, this, std::ref(_components[i]), (i+1)*30));
+        threads.push_back(std::thread(&SDLApp::loop, this, std::ref(_components[i]), 90));
     }
 
     // Execute the main loop (events, render)
@@ -130,7 +132,7 @@ void SDLApp::run(std::set<int32_t> targets, const int32_t desired_fps)
 
     for(auto& thread : threads)
     {
-        // std::cout << "Thread " << thread.get_id() << " stopped" << std::endl;
+        std::cout << "Thread " << thread.get_id() << " stopped" << std::endl;
         thread.join();
     }
 }
@@ -148,6 +150,7 @@ void SDLApp::handleEvents(ComponentData& target, SDL_Event& event)
         int32_t old_height = static_cast<int32_t>((target.location.h - target.location.y) * _window_dimensions.second);
 
         target.component->setSurfaceDimensions(static_cast<uint32_t>((target.location.w - target.location.x) * _window_dimensions.first), static_cast<uint32_t>((target.location.h - target.location.y) * _window_dimensions.second), _renderer);
+        target.component->beforeResize(static_cast<uint32_t>((target.location.w - target.location.x) * _window_dimensions.first), static_cast<uint32_t>((target.location.h - target.location.y) * _window_dimensions.second), _renderer);
         // send new size and old size to the component
         target.component->pushEvent({.event = m_event, .data1 = std::make_shared<int32_t>(old_width), .data2 = std::make_shared<int32_t>(old_height)});
     }
@@ -172,7 +175,7 @@ void SDLApp::handleEvents(ComponentData& target, SDL_Event& event)
 void SDLApp::render(ComponentData& target)
 {
     SDL_SetRenderTarget(_renderer.get(), target.component->_texture.get());
-    SDL_RenderCopy(_renderer.get(), target.component->render(_renderer).get(), nullptr, nullptr);
+    target.component->render(_renderer);
     SDL_Rect dest_rect = {static_cast<int32_t>(target.location.x * _window_dimensions.first) + 1, static_cast<int32_t>(target.location.y * _window_dimensions.second) + 1, static_cast<int32_t>((target.location.w - target.location.x) * _window_dimensions.first) - 2, static_cast<int32_t>((target.location.h - target.location.y) * _window_dimensions.second) - 2};
             
     // draw fps on right top corner

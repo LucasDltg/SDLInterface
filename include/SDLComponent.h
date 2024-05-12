@@ -77,6 +77,12 @@ public:
      */
     virtual void initSurface(std::shared_ptr<SDL_Renderer> renderer) = 0;
 
+    virtual void beforeResize(const uint32_t width, const uint32_t height, std::shared_ptr<SDL_Renderer> renderer)
+    {
+        (void)renderer;
+    }
+
+
 protected:
     std::shared_ptr<SDL_Texture> _texture; ///< The SDL texture.
     std::pair<int32_t, int32_t> _texture_size; ///< The size of the texture
@@ -99,6 +105,7 @@ protected:
 
 private:
     std::deque<EventData> _events; ///< The events for the component.
+    std::mutex _mutex; ///< The mutex for the event queue.
 
     /**
      * @brief Push an event onto the event queue.
