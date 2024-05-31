@@ -78,7 +78,7 @@ void MyComponent::render(std::shared_ptr<SDL_Renderer> renderer)
 
 void MyComponent::initSurface(std::shared_ptr<SDL_Renderer> renderer)
 {
-    _texture_manager.loadTextureFromFile("assets/image.bmp", "bmp", renderer);
+    _texture_manager.loadTextureFromFile("../assets/image.bmp", "bmp", renderer);
     _texture_manager.loadTexture(std::shared_ptr<SDL_Texture>(SDL_CreateTexture(renderer.get(), SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 100, 100), SDL_DestroyTexture), "def");
     _texture_manager.loadTexture(std::shared_ptr<SDL_Texture>(SDL_CreateTexture(renderer.get(), SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 100, 100), SDL_DestroyTexture), "defa");
     _texture_manager.loadDefaultTextures(renderer);

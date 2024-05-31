@@ -7,7 +7,7 @@ int32_t main(int32_t argc, char* argv[])
     (void)argc;
     (void)argv;
 
-    SDLApp app(SDLApp::_MIN_SCREEN_WIDTH, SDLApp::_MIN_SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE, "assets/arial.ttf");
+    SDLApp app(SDLApp::_MIN_SCREEN_WIDTH, SDLApp::_MIN_SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE, "../assets/arial.ttf");
     app.addComponent(std::make_shared<MyComponent>(0xFF0000FF), {0.0f, 0.0f, 0.5f, 0.5f}, 90, true);
     app.addComponent(std::make_shared<MyComponent>(0xFF0000FF), {0.0f, 0.5f, 1.0f, 1.0f}, 120, true);
     app.addComponent(std::make_shared<MyComponent>(0xFF0000FF), {0.5f, 0.0f, 1.0f, 0.5f}, 60, true);
