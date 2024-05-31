@@ -37,7 +37,7 @@ void MyComponent2::update(const uint64_t delta_time)
 {
 }
 
-const std::shared_ptr<SDL_Texture> MyComponent2::render(std::shared_ptr<SDL_Renderer> renderer)
+void MyComponent2::render(std::shared_ptr<SDL_Renderer> renderer)
 {
     // draw image on background
     SDL_SetRenderDrawBlendMode(renderer.get(), SDL_BLENDMODE_NONE); 
@@ -47,10 +47,6 @@ const std::shared_ptr<SDL_Texture> MyComponent2::render(std::shared_ptr<SDL_Rend
     SDL_SetRenderDrawBlendMode(renderer.get(), SDL_BLENDMODE_MUL);
     SDL_SetRenderDrawColor(renderer.get(), (_color >> 24) & 0xFF, (_color >> 16) & 0xFF, (_color >> 8) & 0xFF, _color & 0xFF);
     SDL_RenderFillRect(renderer.get(), &rect);
-
-    // std::cout << "Component2 " << _texture_size.first << " " << _texture_size.second << std::endl;
-
-    return _texture;
 }
 
 void MyComponent2::initSurface(std::shared_ptr<SDL_Renderer> renderer)

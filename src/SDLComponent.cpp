@@ -1,7 +1,7 @@
 #include "../include/SDLComponent.h"
 
-SDLComponent::SDLComponent() 
-    : _texture(nullptr, SDL_DestroyTexture), _texture_size({0, 0}), _is_running(false), _texture_manager()
+SDLComponent::SDLComponent(bool run)
+    : _texture(nullptr, SDL_DestroyTexture), _texture_size({0, 0}), _is_running(run), _texture_manager()
 {}
 
 void SDLComponent::setSurfaceDimensions(uint32_t width, uint32_t height, std::shared_ptr<SDL_Renderer> renderer)
@@ -18,6 +18,21 @@ void SDLComponent::setSurfaceDimensions(uint32_t width, uint32_t height, std::sh
 void SDLComponent::pushEvent(const EventData& event)
 {
     _events.push_back(event);
+}
+
+void SDLComponent::setRunning(bool running)
+{
+    _is_running.store(running);
+}
+
+bool SDLComponent::isRunning() const
+{
+    return _is_running.load();
+}
+
+std::shared_ptr<SDL_Texture> SDLComponent::getTexture() const
+{
+    return _texture;
 }
 
 EventData SDLComponent::popEvent()

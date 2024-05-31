@@ -5,6 +5,7 @@
 #include <mutex>
 #include <deque>
 #include <atomic>
+#include <condition_variable>
 
 class SDLApp;
 struct ComponentData;
@@ -30,7 +31,7 @@ public:
     /**
      * @brief Constructor for SDLComponent.
      */
-    SDLComponent();
+    SDLComponent(bool run = false);
 
     /**
      * @brief Sets the dimensions of the surface.
@@ -63,9 +64,8 @@ public:
      * This method should be overridden by subclasses to render the component.
      * 
      * @param renderer The SDL renderer to render the component with.
-     * @return A shared pointer to the SDL texture representing the rendered component.
      */
-    virtual const std::shared_ptr<SDL_Texture> render(std::shared_ptr<SDL_Renderer> renderer) = 0;
+    virtual void render(std::shared_ptr<SDL_Renderer> renderer) = 0;
 
     /**
      * @brief Initializes the surface.
@@ -77,10 +77,47 @@ public:
      */
     virtual void initSurface(std::shared_ptr<SDL_Renderer> renderer) = 0;
 
-    virtual void beforeResize(const uint32_t width, const uint32_t height, std::shared_ptr<SDL_Renderer> renderer)
+    /**
+     * @brief Change the size of your attributes SDLComponent here.(Most of the time, this is just a call to setSurfaceDimensions for each attribute)
+     * 
+     * @param width The width of the surface.
+     * @param height The height of the surface.
+     * @param renderer The SDL renderer.
+     */
+    virtual void onResize(const uint32_t width, const uint32_t height, std::shared_ptr<SDL_Renderer> renderer)
     {
         (void)renderer;
+        (void)width;
+        (void)height;
     }
+
+    /**
+     * @brief Push an event onto the event queue.
+     * 
+     * @param event The event to push.
+     */
+    void pushEvent(const EventData& event);
+
+    /**
+     * @brief Check if the component is running.
+     * 
+     * @param running True if the component is running, false otherwise.
+     */
+    void setRunning(bool running);
+
+    /**
+     * @brief Check if the component is running.
+     * 
+     * @return True if the component is running, false otherwise.
+     */
+    bool isRunning() const;
+
+    /**
+     * @brief Get the texture.
+     * 
+     * @return The texture.
+     */
+    std::shared_ptr<SDL_Texture> getTexture() const;
 
 
 protected:
@@ -105,14 +142,8 @@ protected:
 
 private:
     std::deque<EventData> _events; ///< The events for the component.
-    std::mutex _mutex; ///< The mutex for the event queue.
-
-    /**
-     * @brief Push an event onto the event queue.
-     * 
-     * @param event The event to push.
-     */
-    void pushEvent(const EventData& event);
+    std::mutex _mutex; ///< The mutex for the object.
+    std::condition_variable _cv; ///< The condition variable for the rendering.
 };
 
 #endif

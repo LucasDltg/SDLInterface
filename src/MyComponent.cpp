@@ -42,7 +42,7 @@ void MyComponent::update(const uint64_t delta_time)
     (void)delta_time;
 }
 
-const std::shared_ptr<SDL_Texture> MyComponent::render(std::shared_ptr<SDL_Renderer> renderer)
+void MyComponent::render(std::shared_ptr<SDL_Renderer> renderer)
 {
     // draw image on background
     SDL_SetRenderDrawBlendMode(renderer.get(), SDL_BLENDMODE_NONE);
@@ -67,23 +67,13 @@ const std::shared_ptr<SDL_Texture> MyComponent::render(std::shared_ptr<SDL_Rende
     SDL_RenderCopy(renderer.get(), _texture_manager.getTexture("defa").get(), nullptr, &rect);
 
     rect = {width / 4, height / 2, width / 4, height / 4};
-    // SDL_Texture *t = SDL_CreateTexture(_renderer.get(), SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width / 4, height / 4);
-    
-    // SDL_SetRenderTarget(_renderer.get(), t);
-    // SDL_SetRenderDrawBlendMode(_renderer.get(), SDL_BLENDMODE_NONE);
-    // _compo.render(_renderer);
-    // SDL_SetRenderTarget(_renderer.get(), _texture.get());
-    // SDL_RenderCopy(_renderer.get(), t, nullptr, &rect);
-    // SDL_DestroyTexture(t);
-
     SDL_SetRenderDrawBlendMode(renderer.get(), SDL_BLENDMODE_NONE);
     SDL_SetRenderTarget(renderer.get(), _compo._texture.get());
     _compo.render(renderer);
     SDL_SetRenderTarget(renderer.get(), _texture.get());
     SDL_RenderCopy(renderer.get(), _compo._texture.get(), nullptr, &rect);
 
-    std::cout << "Component1 " << _texture_size.first << " " << _texture_size.second << std::endl;
-    return _texture;
+    // std::cout << "Component1 " << _texture_size.first << " " << _texture_size.second << std::endl;
 }
 
 void MyComponent::initSurface(std::shared_ptr<SDL_Renderer> renderer)
@@ -110,11 +100,10 @@ void MyComponent::initSurface(std::shared_ptr<SDL_Renderer> renderer)
     _compo.setSurfaceDimensions(_texture_size.first / 4, _texture_size.second / 4, renderer);
 }
 
-void MyComponent::beforeResize(const uint32_t width, const uint32_t height, std::shared_ptr<SDL_Renderer> renderer)
+void MyComponent::onResize(const uint32_t width, const uint32_t height, std::shared_ptr<SDL_Renderer> renderer)
 {
     (void)width;
     (void)height;
-    (void)renderer;
     if(_compo._texture)
     {
         _compo.setSurfaceDimensions(_texture_size.first / 4, _texture_size.second / 4, renderer);

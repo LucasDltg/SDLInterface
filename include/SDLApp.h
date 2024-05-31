@@ -3,7 +3,6 @@
 
 #include "../include/SDLComponent.h"
 #include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_audio.h>
 #include <vector>
 #include <thread>
 #include <mutex>
@@ -49,7 +48,7 @@ public:
      * @param window_flags Additional flags for the SDL window (optional).
      * @param font_path The path to the font file for rendering text (optional).
      */
-    SDLApp(const int32_t screen_width, const int32_t screen_height, const uint32_t window_flags = 0, const std::string& font_path = "assets/arial.ttf");
+    SDLApp(const int32_t screen_width, const int32_t screen_height, const uint32_t window_flags = 0, const std::string& font_path = "../assets/arial.ttf");
 
     /**
      * @brief Add a component to the SDLApp.
@@ -58,7 +57,7 @@ public:
      * @param location The location and size of the component on the screen (default is full screen).
      * @param draw_fps Flag indicating whether to draw FPS on the component (default is false).
      */
-    void addComponent(const std::shared_ptr<SDLComponent>& component, const SDL_FRect location={0.0f, 0.0f, 1.0f, 1.0f}, const bool draw_fps=false);
+    void addComponent(const std::shared_ptr<SDLComponent>& component, const SDL_FRect location={0.0f, 0.0f, 1.0f, 1.0f}, const int32_t fps=60, const bool draw_fps=false);
 
     /**
      * @brief Run the SDL application.
@@ -75,7 +74,6 @@ private:
     std::atomic<bool> _is_running;                   ///< Flag to indicate if the application is running.
     std::vector<ComponentData> _components;          ///< The components of the application.
     std::pair<uint32_t, uint32_t> _window_dimensions;///< Dimensions of the SDL window.
-    std::mutex _mutex;                               ///< Mutex to protect the components vector & window dimensions.
 
     /**
      * @brief Handle SDL events for a target component.
