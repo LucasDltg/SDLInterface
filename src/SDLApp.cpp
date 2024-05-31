@@ -36,7 +36,7 @@ SDLApp::SDLApp(const int32_t screen_width, const int32_t screen_height, const ui
     _window_dimensions = {screen_width, screen_height};
 }
 
-void SDLApp::addComponent(const std::shared_ptr<SDLComponent>& obj, const SDL_FRect location, const int32_t fps, const bool draw_fps)
+void SDLApp::addComponent(const std::shared_ptr<SDLComponent>& obj, const SDL_FRect location, const _Float32 fps, const bool draw_fps)
 {
     _components.push_back({.component = obj, .location = location, .fps = fps, .draw_fps = draw_fps});
     obj->setSurfaceDimensions(static_cast<uint32_t>((location.w - location.x) * _window_dimensions.first), static_cast<uint32_t>((location.h - location.y) * _window_dimensions.second), _renderer);
@@ -44,7 +44,7 @@ void SDLApp::addComponent(const std::shared_ptr<SDLComponent>& obj, const SDL_FR
     obj->initSurface(_renderer);
 }
 
-void SDLApp::run(std::set<int32_t> targets, const int32_t desired_fps)
+void SDLApp::run(std::set<int32_t> targets, const _Float32 fps)
 {
     _is_running = true;
     // launch a thread for each component
@@ -58,7 +58,7 @@ void SDLApp::run(std::set<int32_t> targets, const int32_t desired_fps)
     }
 
     // Execute the main loop (events, render)
-    const std::chrono::microseconds frame_time = std::chrono::microseconds(1000000) / desired_fps;
+    const std::chrono::microseconds frame_time = std::chrono::microseconds(1000000) / static_cast<int32_t>(fps);
     std::chrono::steady_clock::time_point last_time, fps_time;
     fps_time = last_time = std::chrono::steady_clock::now();
     uint32_t frame_count = 0;
@@ -183,7 +183,7 @@ void SDLApp::render(ComponentData& target)
     if(target.draw_fps && _font)
     {
         SDL_Color color = {0, 255, 0, 255};
-        std::string s = std::to_string(target.fps);
+        std::string s = std::to_string(static_cast<int32_t>(std::round(target.fps)));
         while (s.length() < 2)
             s = "  " + s;
         int32_t w, h;
@@ -201,9 +201,9 @@ void SDLApp::render(ComponentData& target)
     SDL_RenderCopy(_renderer.get(), target.component->_texture.get(), nullptr, &dest_rect);
 }
 
-void SDLApp::loop(ComponentData& target, const int32_t desired_fps)
+void SDLApp::loop(ComponentData& target, const _Float32 fps)
 {
-    const std::chrono::microseconds frame_time = std::chrono::microseconds(1000000) / desired_fps;
+    const std::chrono::microseconds frame_time = std::chrono::microseconds(1000000) / static_cast<int32_t>(fps);
     std::chrono::steady_clock::time_point last_time, fps_time, delta_time;
     fps_time = last_time = delta_time = std::chrono::steady_clock::now();
     uint32_t frame_count = 0;

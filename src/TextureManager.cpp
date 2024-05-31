@@ -81,14 +81,6 @@ void TextureManager::updateTextures(const std::shared_ptr<SDL_Renderer>& rendere
     }
 }
 
-void TextureManager::clearTextures()
-{
-    for (auto& texture : _textures)
-    {
-        texture.second.texture.reset();
-    }
-}
-
 std::shared_ptr<SDL_Texture> TextureManager::createDefaultTexture(const std::shared_ptr<SDL_Renderer>& renderer)
 {
     uint32_t width = 32;

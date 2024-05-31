@@ -15,6 +15,13 @@ void SDLComponent::setSurfaceDimensions(uint32_t width, uint32_t height, std::sh
     _texture_size = {width, height};
 }
 
+void SDLComponent::onResize(const uint32_t width, const uint32_t height, std::shared_ptr<SDL_Renderer> renderer)
+{
+    (void)renderer;
+    (void)width;
+    (void)height;
+}
+
 void SDLComponent::pushEvent(const EventData& event)
 {
     _events.push_back(event);

@@ -84,12 +84,7 @@ public:
      * @param height The height of the surface.
      * @param renderer The SDL renderer.
      */
-    virtual void onResize(const uint32_t width, const uint32_t height, std::shared_ptr<SDL_Renderer> renderer)
-    {
-        (void)renderer;
-        (void)width;
-        (void)height;
-    }
+    virtual void onResize(const uint32_t width, const uint32_t height, std::shared_ptr<SDL_Renderer> renderer);
 
     /**
      * @brief Push an event onto the event queue.

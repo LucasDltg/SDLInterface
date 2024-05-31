@@ -12,6 +12,7 @@
 #include <sstream>
 #include <iomanip>
 #include <set>
+#include <cmath>
 
 /**
  * @brief The ComponentData struct represents data for an SDL component.
@@ -20,7 +21,7 @@ struct ComponentData
 {
     std::shared_ptr<SDLComponent> component;  ///< The SDL component.
     SDL_FRect location;                       ///< The location of the component on the screen.
-    int32_t fps;                              ///< Frames per second for the component.
+    _Float32 fps;                              ///< Frames per second for the component.
     bool draw_fps;                            ///< Flag indicating whether to draw FPS on the component.
 };
 
@@ -55,17 +56,18 @@ public:
      * 
      * @param component The component to add.
      * @param location The location and size of the component on the screen (default is full screen).
+     * @param fps The desired frames per second for the component (default is 60).
      * @param draw_fps Flag indicating whether to draw FPS on the component (default is false).
      */
-    void addComponent(const std::shared_ptr<SDLComponent>& component, const SDL_FRect location={0.0f, 0.0f, 1.0f, 1.0f}, const int32_t fps=60, const bool draw_fps=false);
+    void addComponent(const std::shared_ptr<SDLComponent>& component, const SDL_FRect location={0.0f, 0.0f, 1.0f, 1.0f}, const _Float32 fps=60.0f, const bool draw_fps=false);
 
     /**
      * @brief Run the SDL application.
      * 
      * @param targets Set of component IDs to target (default is all components).
-     * @param desired_fps The desired frames per second for the application (default is 60).
+     * @param fps The desired frames per second for the application (default is 60).
      */
-    void run(std::set<int32_t> targets = {}, const int32_t desired_fps=60);
+    void run(std::set<int32_t> targets = {}, const _Float32 fps=60.0f);
     
 private:
     std::shared_ptr<SDL_Window> _window;             ///< The SDL window.
@@ -94,9 +96,9 @@ private:
      * @brief Main loop for a target component.
      * 
      * @param target The target component data.
-     * @param desired_fps The desired frames per second for the component.
+     * @param fps The desired frames per second for the component.
      */
-    void loop(ComponentData& target, const int32_t desired_fps=60);
+    void loop(ComponentData& target, const _Float32 fps=60.0f);
 };
 
 #endif // SDLAPP_H

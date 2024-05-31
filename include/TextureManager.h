@@ -54,11 +54,6 @@ public:
      */
     void updateTextures(const std::shared_ptr<SDL_Renderer>& renderer);
 
-    /**
-     * @brief Clears all loaded textures (automatically called)
-     */
-    void clearTextures();
-
 private:
     /**
      * @brief Creates a default texture.
