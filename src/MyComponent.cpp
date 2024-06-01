@@ -1,4 +1,5 @@
 #include "../include/MyComponent.h"
+#include "../include/Button.h"
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
 
@@ -13,6 +14,7 @@ void MyComponent::handleEvents()
     while(hasEvents())
     {
         event = popEvent();
+        _widget_manager.handleEvent(event, _texture_size);
 
         if (event.event.type == SDL_WINDOWEVENT && event.event.window.event == SDL_WINDOWEVENT_RESIZED)
         {
@@ -95,6 +97,18 @@ void MyComponent::initSurface(std::shared_ptr<SDL_Renderer> renderer)
     SDL_SetRenderTarget(renderer.get(), texture.get());
     SDL_SetRenderDrawColor(renderer.get(), 0xFF, 0xFF, 0x00, 0x80);
     SDL_RenderClear(renderer.get());
+
+    // button
+    SDL_FRect rect = {0.1f, 0.1f, 20.0f / _texture_size.first + 0.1f, 0.2f};
+
+    _widget_manager.addWidget("b1", std::make_shared<Button>(rect, 0xFF0000FF, [this](){
+        _is_running = false;
+    }));
+
+    rect = {0.1f, 0.3f, 20.0f / _texture_size.first + 0.1f, 0.4f};
+    _widget_manager.addWidget("b2", std::make_shared<Button>(rect, 0x00FF00FF, [this](){
+        _widget_manager.hideWidget("b1");
+    }));
 
     _compo.initSurface(renderer);
     _compo.setSurfaceDimensions(_texture_size.first / 4, _texture_size.second / 4, renderer);

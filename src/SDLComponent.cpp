@@ -1,7 +1,7 @@
 #include "../include/SDLComponent.h"
 
 SDLComponent::SDLComponent(bool run)
-    : _texture(nullptr, SDL_DestroyTexture), _texture_size({0, 0}), _is_running(run), _texture_manager()
+    : _texture(nullptr, SDL_DestroyTexture), _texture_size({0, 0}), _is_running(run), _texture_manager(), _widget_manager()
 {}
 
 void SDLComponent::setSurfaceDimensions(uint32_t width, uint32_t height, std::shared_ptr<SDL_Renderer> renderer)

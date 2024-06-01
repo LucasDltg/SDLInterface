@@ -130,24 +130,48 @@ doc/fast:
 .PHONY : doc/fast
 
 #=============================================================================
-# Target rules for targets named BrickBreaker
+# Target rules for targets named SDLInterface
 
 # Build rule for target.
-BrickBreaker: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BrickBreaker
-.PHONY : BrickBreaker
+SDLInterface: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDLInterface
+.PHONY : SDLInterface
 
 # fast build rule for target.
-BrickBreaker/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/build
-.PHONY : BrickBreaker/fast
+SDLInterface/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/build
+.PHONY : SDLInterface/fast
+
+src/Button.o: src/Button.cpp.o
+.PHONY : src/Button.o
+
+# target to build an object file
+src/Button.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/Button.cpp.o
+.PHONY : src/Button.cpp.o
+
+src/Button.i: src/Button.cpp.i
+.PHONY : src/Button.i
+
+# target to preprocess a source file
+src/Button.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/Button.cpp.i
+.PHONY : src/Button.cpp.i
+
+src/Button.s: src/Button.cpp.s
+.PHONY : src/Button.s
+
+# target to generate assembly for a file
+src/Button.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/Button.cpp.s
+.PHONY : src/Button.cpp.s
 
 src/MyComponent.o: src/MyComponent.cpp.o
 .PHONY : src/MyComponent.o
 
 # target to build an object file
 src/MyComponent.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/MyComponent.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/MyComponent.cpp.o
 .PHONY : src/MyComponent.cpp.o
 
 src/MyComponent.i: src/MyComponent.cpp.i
@@ -155,7 +179,7 @@ src/MyComponent.i: src/MyComponent.cpp.i
 
 # target to preprocess a source file
 src/MyComponent.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/MyComponent.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/MyComponent.cpp.i
 .PHONY : src/MyComponent.cpp.i
 
 src/MyComponent.s: src/MyComponent.cpp.s
@@ -163,7 +187,7 @@ src/MyComponent.s: src/MyComponent.cpp.s
 
 # target to generate assembly for a file
 src/MyComponent.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/MyComponent.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/MyComponent.cpp.s
 .PHONY : src/MyComponent.cpp.s
 
 src/MyComponent2.o: src/MyComponent2.cpp.o
@@ -171,7 +195,7 @@ src/MyComponent2.o: src/MyComponent2.cpp.o
 
 # target to build an object file
 src/MyComponent2.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/MyComponent2.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/MyComponent2.cpp.o
 .PHONY : src/MyComponent2.cpp.o
 
 src/MyComponent2.i: src/MyComponent2.cpp.i
@@ -179,7 +203,7 @@ src/MyComponent2.i: src/MyComponent2.cpp.i
 
 # target to preprocess a source file
 src/MyComponent2.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/MyComponent2.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/MyComponent2.cpp.i
 .PHONY : src/MyComponent2.cpp.i
 
 src/MyComponent2.s: src/MyComponent2.cpp.s
@@ -187,7 +211,7 @@ src/MyComponent2.s: src/MyComponent2.cpp.s
 
 # target to generate assembly for a file
 src/MyComponent2.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/MyComponent2.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/MyComponent2.cpp.s
 .PHONY : src/MyComponent2.cpp.s
 
 src/SDLApp.o: src/SDLApp.cpp.o
@@ -195,7 +219,7 @@ src/SDLApp.o: src/SDLApp.cpp.o
 
 # target to build an object file
 src/SDLApp.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/SDLApp.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/SDLApp.cpp.o
 .PHONY : src/SDLApp.cpp.o
 
 src/SDLApp.i: src/SDLApp.cpp.i
@@ -203,7 +227,7 @@ src/SDLApp.i: src/SDLApp.cpp.i
 
 # target to preprocess a source file
 src/SDLApp.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/SDLApp.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/SDLApp.cpp.i
 .PHONY : src/SDLApp.cpp.i
 
 src/SDLApp.s: src/SDLApp.cpp.s
@@ -211,7 +235,7 @@ src/SDLApp.s: src/SDLApp.cpp.s
 
 # target to generate assembly for a file
 src/SDLApp.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/SDLApp.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/SDLApp.cpp.s
 .PHONY : src/SDLApp.cpp.s
 
 src/SDLComponent.o: src/SDLComponent.cpp.o
@@ -219,7 +243,7 @@ src/SDLComponent.o: src/SDLComponent.cpp.o
 
 # target to build an object file
 src/SDLComponent.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/SDLComponent.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/SDLComponent.cpp.o
 .PHONY : src/SDLComponent.cpp.o
 
 src/SDLComponent.i: src/SDLComponent.cpp.i
@@ -227,7 +251,7 @@ src/SDLComponent.i: src/SDLComponent.cpp.i
 
 # target to preprocess a source file
 src/SDLComponent.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/SDLComponent.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/SDLComponent.cpp.i
 .PHONY : src/SDLComponent.cpp.i
 
 src/SDLComponent.s: src/SDLComponent.cpp.s
@@ -235,7 +259,7 @@ src/SDLComponent.s: src/SDLComponent.cpp.s
 
 # target to generate assembly for a file
 src/SDLComponent.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/SDLComponent.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/SDLComponent.cpp.s
 .PHONY : src/SDLComponent.cpp.s
 
 src/TextureManager.o: src/TextureManager.cpp.o
@@ -243,7 +267,7 @@ src/TextureManager.o: src/TextureManager.cpp.o
 
 # target to build an object file
 src/TextureManager.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/TextureManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/TextureManager.cpp.o
 .PHONY : src/TextureManager.cpp.o
 
 src/TextureManager.i: src/TextureManager.cpp.i
@@ -251,7 +275,7 @@ src/TextureManager.i: src/TextureManager.cpp.i
 
 # target to preprocess a source file
 src/TextureManager.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/TextureManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/TextureManager.cpp.i
 .PHONY : src/TextureManager.cpp.i
 
 src/TextureManager.s: src/TextureManager.cpp.s
@@ -259,15 +283,63 @@ src/TextureManager.s: src/TextureManager.cpp.s
 
 # target to generate assembly for a file
 src/TextureManager.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/TextureManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/TextureManager.cpp.s
 .PHONY : src/TextureManager.cpp.s
+
+src/Widget.o: src/Widget.cpp.o
+.PHONY : src/Widget.o
+
+# target to build an object file
+src/Widget.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/Widget.cpp.o
+.PHONY : src/Widget.cpp.o
+
+src/Widget.i: src/Widget.cpp.i
+.PHONY : src/Widget.i
+
+# target to preprocess a source file
+src/Widget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/Widget.cpp.i
+.PHONY : src/Widget.cpp.i
+
+src/Widget.s: src/Widget.cpp.s
+.PHONY : src/Widget.s
+
+# target to generate assembly for a file
+src/Widget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/Widget.cpp.s
+.PHONY : src/Widget.cpp.s
+
+src/WidgetManager.o: src/WidgetManager.cpp.o
+.PHONY : src/WidgetManager.o
+
+# target to build an object file
+src/WidgetManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/WidgetManager.cpp.o
+.PHONY : src/WidgetManager.cpp.o
+
+src/WidgetManager.i: src/WidgetManager.cpp.i
+.PHONY : src/WidgetManager.i
+
+# target to preprocess a source file
+src/WidgetManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/WidgetManager.cpp.i
+.PHONY : src/WidgetManager.cpp.i
+
+src/WidgetManager.s: src/WidgetManager.cpp.s
+.PHONY : src/WidgetManager.s
+
+# target to generate assembly for a file
+src/WidgetManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/WidgetManager.cpp.s
+.PHONY : src/WidgetManager.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -275,7 +347,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -283,7 +355,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BrickBreaker.dir/build.make CMakeFiles/BrickBreaker.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLInterface.dir/build.make CMakeFiles/SDLInterface.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 # Help Target
@@ -295,7 +367,10 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... doc"
-	@echo "... BrickBreaker"
+	@echo "... SDLInterface"
+	@echo "... src/Button.o"
+	@echo "... src/Button.i"
+	@echo "... src/Button.s"
 	@echo "... src/MyComponent.o"
 	@echo "... src/MyComponent.i"
 	@echo "... src/MyComponent.s"
@@ -311,6 +386,12 @@ help:
 	@echo "... src/TextureManager.o"
 	@echo "... src/TextureManager.i"
 	@echo "... src/TextureManager.s"
+	@echo "... src/Widget.o"
+	@echo "... src/Widget.i"
+	@echo "... src/Widget.s"
+	@echo "... src/WidgetManager.o"
+	@echo "... src/WidgetManager.i"
+	@echo "... src/WidgetManager.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

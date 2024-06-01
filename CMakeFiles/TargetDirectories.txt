@@ -1,0 +1,4 @@
+/home/ldeletang/Année2/SDLInterface/CMakeFiles/doc.dir
+/home/ldeletang/Année2/SDLInterface/CMakeFiles/SDLInterface.dir
+/home/ldeletang/Année2/SDLInterface/CMakeFiles/edit_cache.dir
+/home/ldeletang/Année2/SDLInterface/CMakeFiles/rebuild_cache.dir

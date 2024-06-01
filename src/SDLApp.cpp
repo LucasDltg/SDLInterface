@@ -177,6 +177,7 @@ void SDLApp::render(ComponentData& target)
 {
     SDL_SetRenderTarget(_renderer.get(), target.component->_texture.get());
     target.component->render(_renderer);
+    target.component->_widget_manager.renderWidgets(_renderer, target.component->_texture_size);
     SDL_Rect dest_rect = {static_cast<int32_t>(target.location.x * _window_dimensions.first) + 1, static_cast<int32_t>(target.location.y * _window_dimensions.second) + 1, static_cast<int32_t>((target.location.w - target.location.x) * _window_dimensions.first) - 2, static_cast<int32_t>((target.location.h - target.location.y) * _window_dimensions.second) - 2};
             
     // draw fps on right top corner
