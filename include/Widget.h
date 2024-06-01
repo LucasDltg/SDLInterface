@@ -23,7 +23,6 @@ public:
      * @brief Gets the widget rectangle.
      * @param renderer The SDL renderer.
      * @param size The window size.
-     * @return The widget rectangle.
      */
     virtual void render(std::shared_ptr<SDL_Renderer> renderer, std::pair<int32_t, int32_t>& size) = 0;
 
