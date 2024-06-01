@@ -1,5 +1,20 @@
 #include "../include/Button.h"
 
+/* -------------------------- TODO ------------------------------
+- add text to button
+- add hover effect
+- add click effect
+- add border
+- add border color
+- add border width
+- add text color
+- add text font
+- add text size
+*/
+
+
+
+
 Button::Button(SDL_FRect rect, uint32_t color, std::function<void()> onClick)
 : Widget(rect), _color(color), _onClick(onClick)
 {}

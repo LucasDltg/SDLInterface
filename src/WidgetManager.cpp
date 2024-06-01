@@ -42,6 +42,11 @@ void WidgetManager::handleEvent(const EventData& event, std::pair<int32_t, int32
     }
 }
 
+std::shared_ptr<Widget>& WidgetManager::getWidget(const std::string& key)
+{
+    return _widgets[key];
+}
+
 std::shared_ptr<Widget>& WidgetManager::operator[](const std::string& key)
 {
     return _widgets[key];

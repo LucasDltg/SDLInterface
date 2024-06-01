@@ -6,6 +6,7 @@
 MyComponent::MyComponent(uint32_t color)
     : SDLComponent(), _color(color), _compo(color)
 {
+    
 }
 
 void MyComponent::handleEvents()
