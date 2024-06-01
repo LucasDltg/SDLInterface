@@ -48,6 +48,14 @@ public:
     const std::shared_ptr<SDL_Texture> getTexture(const std::string& key);
 
     /**
+     * @brief Retrieves a texture by key, if it does not exist, returns the default texture, if it does not exist, returns nullptr.
+     * 
+     * @param key The key of the texture to retrieve.
+     * @return A shared pointer to the requested SDL texture.
+     */
+    const std::shared_ptr<SDL_Texture> operator[](const std::string& key);
+
+    /**
      * @brief Updates the textures when renderer is updated (automatically called when resizing).
      * 
      * @param renderer A shared pointer to the SDL renderer.

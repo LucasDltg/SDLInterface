@@ -48,7 +48,7 @@ void MyComponent::render(std::shared_ptr<SDL_Renderer> renderer)
 {
     // draw image on background
     SDL_SetRenderDrawBlendMode(renderer.get(), SDL_BLENDMODE_NONE);
-    SDL_RenderCopy(renderer.get(), _texture_manager.getTexture("bmp").get(), nullptr, nullptr);
+    SDL_RenderCopy(renderer.get(), _texture_manager["bmp"].get(), nullptr, nullptr);
 
     int32_t width, height;
     SDL_QueryTexture(_texture.get(), nullptr, nullptr, &width, &height);
@@ -62,11 +62,11 @@ void MyComponent::render(std::shared_ptr<SDL_Renderer> renderer)
     SDL_SetRenderDrawBlendMode(renderer.get(), SDL_BLENDMODE_NONE);
     // draw rectangle on top left
     rect = {width / 4, height / 4, width / 4, height / 4};
-    SDL_RenderCopy(renderer.get(), _texture_manager.getTexture("def").get(), nullptr, &rect);
+    SDL_RenderCopy(renderer.get(), _texture_manager["def"].get(), nullptr, &rect);
 
     // draw rectangle on bottom right
     rect = {width / 2, height / 2, width / 4, height / 4};
-    SDL_RenderCopy(renderer.get(), _texture_manager.getTexture("defa").get(), nullptr, &rect);
+    SDL_RenderCopy(renderer.get(), _texture_manager["defa"].get(), nullptr, &rect);
 
     rect = {width / 4, height / 2, width / 4, height / 4};
     SDL_SetRenderDrawBlendMode(renderer.get(), SDL_BLENDMODE_NONE);
@@ -86,13 +86,13 @@ void MyComponent::initSurface(std::shared_ptr<SDL_Renderer> renderer)
     _texture_manager.loadDefaultTextures(renderer);
 
     
-    std::shared_ptr<SDL_Texture> texture = _texture_manager.getTexture("def");
+    std::shared_ptr<SDL_Texture> texture = _texture_manager["def"];
     SDL_SetTextureBlendMode(texture.get(), SDL_BLENDMODE_NONE);
     SDL_SetRenderTarget(renderer.get(), texture.get());
     SDL_SetRenderDrawColor(renderer.get(), 0xFF, 0x00, 0xFF, 0x00);
     SDL_RenderClear(renderer.get());
 
-    texture = _texture_manager.getTexture("defa");
+    texture = _texture_manager["defa"];
     SDL_SetTextureBlendMode(texture.get(), SDL_BLENDMODE_NONE);
     SDL_SetRenderTarget(renderer.get(), texture.get());
     SDL_SetRenderDrawColor(renderer.get(), 0xFF, 0xFF, 0x00, 0x80);

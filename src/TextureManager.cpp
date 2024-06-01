@@ -55,6 +55,11 @@ const std::shared_ptr<SDL_Texture> TextureManager::getTexture(const std::string&
     return it->second.texture;
 }
 
+const std::shared_ptr<SDL_Texture> TextureManager::operator[](const std::string& key)
+{
+    return getTexture(key);
+}
+
 void TextureManager::updateTextures(const std::shared_ptr<SDL_Renderer>& renderer)
 {
     for (auto& texture : _textures)
