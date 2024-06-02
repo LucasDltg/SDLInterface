@@ -1,3 +1,6 @@
+# SDLInterface
+Version: 1.0.0
+
 # This repository provides three major classes for use with the SDL (Simple DirectMedia Layer) library:
 
 ## SDLApp:
