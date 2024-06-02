@@ -6,7 +6,7 @@
 MyComponent::MyComponent(uint32_t color)
     : SDLComponent(), _color(color), _compo(color)
 {
-    
+
 }
 
 void MyComponent::handleEvents()
@@ -102,14 +102,16 @@ void MyComponent::initSurface(std::shared_ptr<SDL_Renderer> renderer)
     // button
     SDL_FRect rect = {0.1f, 0.1f, 20.0f / _texture_size.first + 0.1f, 0.2f};
 
-    _widget_manager.addWidget("b1", std::make_shared<Button>(rect, 0xFF0000FF, [this](){
+    _widget_manager.addWidget("b1", std::make_shared<Button>(rect, 0xFF0000FF, _texture_manager["bmp"], 0xFFFFFFFF, 1, [this](){
         _is_running = false;
-    }));
+    }, [](){}));
 
-    rect = {0.1f, 0.3f, 20.0f / _texture_size.first + 0.1f, 0.4f};
-    _widget_manager.addWidget("b2", std::make_shared<Button>(rect, 0x00FF00FF, [this](){
-        _widget_manager.hideWidget("b1");
-    }));
+    // rect = {0.1f, 0.3f, 20.0f / _texture_size.first + 0.1f, 0.4f};
+    // _widget_manager.addWidget("b2", std::make_shared<Button>(rect, 0x00FF00FF, [this](){
+        // _widget_manager.hideWidget("b1");
+    // }, [this](){
+        // _widget_manager.showWidget("b1");
+    // }));
 
     _compo.initSurface(renderer);
     _compo.setSurfaceDimensions(_texture_size.first / 4, _texture_size.second / 4, renderer);
