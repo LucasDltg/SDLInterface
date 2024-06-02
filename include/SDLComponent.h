@@ -3,6 +3,7 @@
 
 #include "../include/TextureManager.h"
 #include "../include/WidgetManager.h"
+#include "../include/FontManager.h"
 #include "../include/EventData.h"
 #include <mutex>
 #include <deque>
@@ -113,6 +114,8 @@ protected:
     std::atomic<bool> _is_running; ///< Flag indicating if the component is running.
     TextureManager _texture_manager; ///< The texture manager for the component.
     WidgetManager _widget_manager; ///< The widget manager for the component.
+    FontManager _font_manager; ///< The font manager for the component.
+
 
     /**
      * @brief Pop an event from the event queue.

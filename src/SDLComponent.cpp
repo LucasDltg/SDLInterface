@@ -1,7 +1,7 @@
 #include "../include/SDLComponent.h"
 
 SDLComponent::SDLComponent(bool run)
-    : _texture(nullptr, SDL_DestroyTexture), _texture_size({0, 0}), _is_running(run), _texture_manager(), _widget_manager()
+    : _texture(nullptr, SDL_DestroyTexture), _texture_size({0, 0}), _is_running(run), _texture_manager(), _widget_manager(), _font_manager()
 {}
 
 void SDLComponent::setSurfaceDimensions(uint32_t width, uint32_t height, std::shared_ptr<SDL_Renderer> renderer)
@@ -9,7 +9,7 @@ void SDLComponent::setSurfaceDimensions(uint32_t width, uint32_t height, std::sh
     _texture.reset(SDL_CreateTexture(renderer.get(), SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height), SDL_DestroyTexture);
     if (!_texture.get())
     {
-        throw std::runtime_error("SDL_CreateRGBSurface failed");
+        throw std::runtime_error("SDL_CreateTexture failed");
     }
     _texture_manager.updateTextures(renderer);
     _texture_size = {width, height};

@@ -6,7 +6,6 @@
 MyComponent::MyComponent(uint32_t color)
     : SDLComponent(), _color(color), _compo(color)
 {
-
 }
 
 void MyComponent::handleEvents()
@@ -76,6 +75,14 @@ void MyComponent::render(std::shared_ptr<SDL_Renderer> renderer)
     SDL_SetRenderTarget(renderer.get(), _texture.get());
     SDL_RenderCopy(renderer.get(), _compo._texture.get(), nullptr, &rect);
 
+
+    // draw text
+    std::unique_ptr<SDL_Surface, decltype(&SDL_FreeSurface)> surface(TTF_RenderText_Solid(_font_manager["arial24"].get(), "Hello World", {0, 0, 0, 0}), SDL_FreeSurface);
+    std::shared_ptr<SDL_Texture> texture(SDL_CreateTextureFromSurface(renderer.get(), surface.get()), SDL_DestroyTexture);
+    SDL_QueryTexture(texture.get(), nullptr, nullptr, &width, &height);
+    rect = {width / 4, 0, width, height};
+    SDL_RenderCopy(renderer.get(), texture.get(), nullptr, &rect);
+
     // std::cout << "Component1 " << _texture_size.first << " " << _texture_size.second << std::endl;
 }
 
@@ -112,6 +119,9 @@ void MyComponent::initSurface(std::shared_ptr<SDL_Renderer> renderer)
     // }, [this](){
         // _widget_manager.showWidget("b1");
     // }));
+
+    // Font
+    _font_manager.loadFontFromFile("../assets/arial.ttf", "arial24", 24);
 
     _compo.initSurface(renderer);
     _compo.setSurfaceDimensions(_texture_size.first / 4, _texture_size.second / 4, renderer);
