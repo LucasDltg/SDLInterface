@@ -41,7 +41,7 @@ void Button::render(std::shared_ptr<SDL_Renderer> renderer, std::pair<int32_t, i
         std::shared_ptr<SDL_Texture> texture(SDL_CreateTextureFromSurface(renderer.get(), surface.get()), SDL_DestroyTexture);
         int32_t width, height;
         SDL_QueryTexture(texture.get(), nullptr, nullptr, &width, &height);
-        rect = {static_cast<int32_t>(_rect.x * size.first), static_cast<int32_t>(_rect.y * size.second), width, height};
+        rect = {static_cast<int32_t>(_rect.x * size.first) + (static_cast<int32_t>((_rect.w - _rect.x) * size.first) - width) / 2, static_cast<int32_t>(_rect.y * size.second) + (static_cast<int32_t>((_rect.h - _rect.y) * size.second) - height) / 2, width, height};
         SDL_RenderCopy(renderer.get(), texture.get(), nullptr, &rect);
     }
 }

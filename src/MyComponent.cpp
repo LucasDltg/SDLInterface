@@ -104,7 +104,7 @@ void MyComponent::initSurface(std::shared_ptr<SDL_Renderer> renderer)
     // button
     SDL_FRect rect = {0.1f, 0.1f, 100.0f / _texture_size.first + 0.1f, 0.2f};
 
-    _widget_manager.addWidget("b1", std::make_shared<Button>(rect, 0xFF0000FF, _texture_manager["bmp"], 0xFFFFFFFF, 1, _font_manager["arial24"], "Click me", 0xFF0000FF,
+    _widget_manager.addWidget("b1", std::make_shared<Button>(rect, 0xFF0000FF, _texture_manager["bmp"], 0xFFFFFFFF, 1, _font_manager["arial24"], "Shutdown", 0xFF0000FF,
     [this](){
         _is_running = false;
     }, [](){}));
