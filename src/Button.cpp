@@ -9,8 +9,8 @@
 - add text size
 */
 
-Button::Button(SDL_FRect rect, uint32_t color, std::shared_ptr<SDL_Texture> texture, uint32_t border_color, uint32_t border_width, std::function<void()> on_click, std::function<void()> on_hover)
-: Widget(rect), _color(color), _texture(texture), _border_color(border_color), _border_width(border_width), _on_click(on_click), _on_hover(on_hover)
+Button::Button(SDL_FRect rect, uint32_t color, std::shared_ptr<SDL_Texture> texture, uint32_t border_color, uint32_t border_width, std::shared_ptr<TTF_Font> font, std::string text, uint32_t text_color, std::function<void()> on_click, std::function<void()> on_hover)
+: Widget(rect), _color(color), _texture(texture), _border_color(border_color), _border_width(border_width), _font(font), _text(text), _text_color(text_color), _on_click(on_click), _on_hover(on_hover)
 {}
 
 void Button::render(std::shared_ptr<SDL_Renderer> renderer, std::pair<int32_t, int32_t>& size)
@@ -32,6 +32,17 @@ void Button::render(std::shared_ptr<SDL_Renderer> renderer, std::pair<int32_t, i
     {
         SDL_SetRenderDrawColor(renderer.get(), (_color >> 24) & 0xFF, (_color >> 16) & 0xFF, (_color >> 8) & 0xFF, _color & 0xFF);
         SDL_RenderFillRect(renderer.get(), &rect);
+    }
+
+    // draw text
+    if(!_text.empty() && _font.get())
+    {
+        std::unique_ptr<SDL_Surface, decltype(&SDL_FreeSurface)> surface(TTF_RenderText_Solid(_font.get(), _text.c_str(), {static_cast<uint8_t>((_text_color >> 24) & 0xFF), static_cast<uint8_t>((_text_color >> 16) & 0xFF), static_cast<uint8_t>((_text_color >> 8) & 0xFF), static_cast<uint8_t>(_text_color & 0xFF)}), SDL_FreeSurface);
+        std::shared_ptr<SDL_Texture> texture(SDL_CreateTextureFromSurface(renderer.get(), surface.get()), SDL_DestroyTexture);
+        int32_t width, height;
+        SDL_QueryTexture(texture.get(), nullptr, nullptr, &width, &height);
+        rect = {static_cast<int32_t>(_rect.x * size.first), static_cast<int32_t>(_rect.y * size.second), width, height};
+        SDL_RenderCopy(renderer.get(), texture.get(), nullptr, &rect);
     }
 }
 

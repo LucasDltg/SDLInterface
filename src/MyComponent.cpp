@@ -75,14 +75,6 @@ void MyComponent::render(std::shared_ptr<SDL_Renderer> renderer)
     SDL_SetRenderTarget(renderer.get(), _texture.get());
     SDL_RenderCopy(renderer.get(), _compo._texture.get(), nullptr, &rect);
 
-
-    // draw text
-    std::unique_ptr<SDL_Surface, decltype(&SDL_FreeSurface)> surface(TTF_RenderText_Solid(_font_manager["arial24"].get(), "Hello World", {0, 0, 0, 0}), SDL_FreeSurface);
-    std::shared_ptr<SDL_Texture> texture(SDL_CreateTextureFromSurface(renderer.get(), surface.get()), SDL_DestroyTexture);
-    SDL_QueryTexture(texture.get(), nullptr, nullptr, &width, &height);
-    rect = {width / 4, 0, width, height};
-    SDL_RenderCopy(renderer.get(), texture.get(), nullptr, &rect);
-
     // std::cout << "Component1 " << _texture_size.first << " " << _texture_size.second << std::endl;
 }
 
@@ -106,10 +98,14 @@ void MyComponent::initSurface(std::shared_ptr<SDL_Renderer> renderer)
     SDL_SetRenderDrawColor(renderer.get(), 0xFF, 0xFF, 0x00, 0x80);
     SDL_RenderClear(renderer.get());
 
-    // button
-    SDL_FRect rect = {0.1f, 0.1f, 20.0f / _texture_size.first + 0.1f, 0.2f};
+    // Font
+    _font_manager.loadFontFromFile("../assets/arial.ttf", "arial24", 24);
 
-    _widget_manager.addWidget("b1", std::make_shared<Button>(rect, 0xFF0000FF, _texture_manager["bmp"], 0xFFFFFFFF, 1, [this](){
+    // button
+    SDL_FRect rect = {0.1f, 0.1f, 100.0f / _texture_size.first + 0.1f, 0.2f};
+
+    _widget_manager.addWidget("b1", std::make_shared<Button>(rect, 0xFF0000FF, _texture_manager["bmp"], 0xFFFFFFFF, 1, _font_manager["arial24"], "Click me", 0xFF0000FF,
+    [this](){
         _is_running = false;
     }, [](){}));
 
@@ -119,9 +115,6 @@ void MyComponent::initSurface(std::shared_ptr<SDL_Renderer> renderer)
     // }, [this](){
         // _widget_manager.showWidget("b1");
     // }));
-
-    // Font
-    _font_manager.loadFontFromFile("../assets/arial.ttf", "arial24", 24);
 
     _compo.initSurface(renderer);
     _compo.setSurfaceDimensions(_texture_size.first / 4, _texture_size.second / 4, renderer);
